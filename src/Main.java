@@ -14,5 +14,11 @@ public class Main {
         shop.AddProduct(product1,7);
 
         shop.PrintStock();
+
+        Basket basket1=new Basket();
+        basket1.AddToBasket(product1,shop,4);
+        basket1.AddToBasket(product2,shop,5);
+        basket1.PrintBasket();
+        System.out.println("Price of the basket: "+basket1.GetBasketValue()+"$");
     }
 }
