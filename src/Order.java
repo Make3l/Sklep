@@ -19,12 +19,13 @@ public class Order {
         for(Map.Entry<Product,Integer>it:products.entrySet())
             if(!shop.ReduceProductAmount(it.getKey(),it.getValue()))
                 return false;
-        
+
         return true;
     }
 
     public void PrintOrder(){
         System.out.println("Order number: "+id);
+        System.out.println("Date: "+date);
         for(Map.Entry<Product,Integer>it:products.entrySet())
             System.out.println("    "+it.getValue()+"x "+it.getKey().GetName()+": "+price+"$");
     }
