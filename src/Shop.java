@@ -1,27 +1,48 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Shop {
-    private List<Product>products=new ArrayList<>();
-    private Map<Product,Integer> numberOfProducts=new HashMap<>();
-    Shop( List<Product>products,Map<Product,Integer> numberOfProducts){
+    private Map<Product,Integer> products=new HashMap<>();
+
+    Shop(){}
+    Shop(Map<Product,Integer> products){
         this.products=products;
-        this.numberOfProducts=numberOfProducts;
-    }
-    void IncrementProductNumber(Product product, int amount){
-        numberOfProducts.put(product,numberOfProducts.get(product)+amount);
-    }
-    void NewProduct(Product product,int amount){
-        products.add(product);
-        numberOfProducts.put(product,amount);
     }
 
-    void PrintStock(){
+    public void AddProduct(Product product,int amount){
+        if(products.containsKey(product))
+            products.put(product,products.get(product)+amount);
+        else
+            products.put(product,amount);
+    }
+
+    public void ReduceProductAmount(Product product,int amount){
+        Integer amountInStock=products.get(product);
+        if(amountInStock==null){
+            System.out.println("Product not found in stock");
+            return;
+        }
+
+        if(amountInStock<amount){
+            System.out.println("Not enough products in stock");
+            return;
+        }
+
+        int newAmount=amountInStock-amount;
+        if(newAmount==0)
+            products.remove(product);
+        else
+            products.put(product,newAmount);
+    }
+
+    public int GetProductAmount(Product product){
+        return products.get(product);
+    }
+
+    public void PrintStock(){
         System.out.println("In stock: ");
-        for(Map.Entry<Product,Integer> it: numberOfProducts.entrySet())
-            System.out.println(" "+it.getKey().GetName()+": "+it.getValue());
+        for(Map.Entry<Product,Integer> it: products.entrySet())
+            System.out.println("    "+it.getKey().GetName()+": "+it.getValue());
     }
 
 }
