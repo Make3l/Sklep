@@ -16,16 +16,16 @@ public class Shop {
             products.put(product,amount);
     }
 
-    public void ReduceProductAmount(Product product,int amount){
+    public boolean ReduceProductAmount(Product product,int amount){
         Integer amountInStock=products.get(product);
         if(amountInStock==null){
             System.out.println("Product not found in stock");
-            return;
+            return false;
         }
 
         if(amountInStock<amount){
             System.out.println("Not enough products in stock");
-            return;
+            return false;
         }
 
         int newAmount=amountInStock-amount;
@@ -33,6 +33,7 @@ public class Shop {
             products.remove(product);
         else
             products.put(product,newAmount);
+        return true;
     }
 
     public int GetProductAmount(Product product){
