@@ -3,18 +3,16 @@ import java.util.*;
 public class Main {
     public static void main(String[] args){
         Product product1=new Product(0,"Apple",2.99);
-        System.out.println(product1.toString());
+        Product product2=new Product(1,"Banana",1.19);
+        Product product3=new Product(2,"Coconut",4.99);
 
-        List<Product> products=new ArrayList<>(Arrays.asList(product1,new Product(1,"Banana",1.99),new Product(2,"Ketchup",6)));
-        Map<Product,Integer>numberOfProducts=new HashMap<>();
-        Random random=new Random();
-        for(Product product:products)
-        {
-            int amount= random.nextInt(20)+1;
-            System.out.println(product.GetName()+": "+amount);
-            numberOfProducts.put(product,amount);
-        }
-        Shop shop1=new Shop(products,numberOfProducts);
-        shop1.PrintStock();
+        Shop shop=new Shop();
+        shop.AddProduct(product1,3);
+        shop.AddProduct(product2,5);
+        shop.AddProduct(product3,7);
+
+        shop.AddProduct(product1,7);
+
+        shop.PrintStock();
     }
 }
